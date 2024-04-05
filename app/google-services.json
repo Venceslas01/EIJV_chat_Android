@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "874062629065",
+    "project_id": "chateijv",
+    "storage_bucket": "chateijv.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:874062629065:android:c25ac45e757462a48d2518",
+        "android_client_info": {
+          "package_name": "fr.upjv.eijv_chat_androd"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFWbvnDOlkg2mRL6PWDP_ZpJAe5cTfcFw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
