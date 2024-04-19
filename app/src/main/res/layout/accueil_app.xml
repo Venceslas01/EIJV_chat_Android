@@ -9,35 +9,26 @@
     <TextView
         android:id="@+id/id_app"
         android:layout_width="177dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="167dp"
+        android:layout_height="43dp"
         android:text="4 Chat-EIJV"
         android:textSize="32sp"
-        app:layout_constraintBottom_toTopOf="@+id/id_button_Inscription"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="117dp"
+        tools:layout_editor_absoluteY="16dp" />
 
     <Button
         android:id="@+id/id_button_Inscription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="85dp"
         android:text="Inscription"
-        app:layout_constraintBottom_toTopOf="@+id/id_button_connexion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/id_app" />
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="226dp" />
 
     <Button
         android:id="@+id/id_button_connexion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="325dp"
         android:text="Connexion"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/id_button_Inscription"
-        app:layout_constraintTop_toBottomOf="@+id/id_button_Inscription" />
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="358dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
