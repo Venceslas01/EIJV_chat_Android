@@ -42,4 +42,16 @@
         app:layout_constraintEnd_toStartOf="@+id/id_envoyer_messsage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/id_quit_chat" />
+
+    <ScrollView
+        android:layout_width="409dp"
+        android:layout_height="536dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="48dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
