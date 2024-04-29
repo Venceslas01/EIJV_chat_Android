@@ -23,11 +23,7 @@
         </activity>
         <activity
             android:name=".activityScroll"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.example.MY_ACTION" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+            android:exported="false">
         </activity>
 
     </application>
