@@ -22,13 +22,13 @@ public class ActivitySendMessage {
         this.editTextMessage = editTextMessage;
     }
 
-    public void onClickMessageToSend(View view){
+    public void onClickMessageToSend(View view) {
 
         Map<String, Object> maMap = new HashMap<>();
 
         String contenuMessage = editTextMessage.getText().toString().trim();
 
-        if (contenuMessage.isEmpty()){
+        if (contenuMessage.isEmpty()) {
             return;
         }
 
@@ -55,6 +55,8 @@ public class ActivitySendMessage {
     private String generateUUID() {
         return UUID.randomUUID().toString();
     }
+
     private void showToast(String message) {
         Toast.makeText(editTextMessage.getContext(), message, Toast.LENGTH_SHORT).show();
     }
+}
