@@ -33,11 +33,10 @@ public class ActivitySendMessage {
         }
 
         long timestamp = System.currentTimeMillis();
-        String uuid = generateUUID();
 
         maMap.put("timestamp", timestamp);
         maMap.put("contenu", contenuMessage);
-        maMap.put("uuid", uuid);
+        maMap.put("sender", "Melvin");
 
         maBase.collection("CHAT").add(maMap)
                 .addOnSuccessListener(documentReference -> {
@@ -52,11 +51,8 @@ public class ActivitySendMessage {
         toastSendMessage.show();
     }
 
-    private String generateUUID() {
-        return UUID.randomUUID().toString();
-    }
-
     private void showToast(String message) {
         Toast.makeText(editTextMessage.getContext(), message, Toast.LENGTH_SHORT).show();
     }
+
 }
