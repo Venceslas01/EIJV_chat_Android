@@ -1,16 +1,6 @@
 package fr.upjv.eijv_chat_androd;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.time.LocalDateTime;
-import java.util.UUID;
-import java.util.concurrent.ThreadLocalRandom;
-
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import java.util.UUID;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class messageFictif {
     private String content;
@@ -49,6 +39,3 @@ public class messageFictif {
         this.timestamp = timestamp;
     }
 }
-
-
-

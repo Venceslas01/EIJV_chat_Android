@@ -21,7 +21,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageViewHolder> {
     @Override
     public int getItemViewType(int position) {
         messageFictif message = lesMessages.get(position);
-        return message.getSender().equals(mySenderIdentifier) ? VIEW_TYPE_ME : VIEW_TYPE_OTHER;
+        if (message.getSender() != null && message.getSender().equals(mySenderIdentifier)) {
+            return VIEW_TYPE_ME;
+        } else {
+            return VIEW_TYPE_OTHER;
+        }
     }
 
     @NonNull

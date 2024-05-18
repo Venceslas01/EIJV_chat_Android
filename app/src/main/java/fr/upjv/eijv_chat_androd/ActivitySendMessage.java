@@ -36,7 +36,7 @@ public class ActivitySendMessage {
 
         maMap.put("timestamp", timestamp);
         maMap.put("contenu", contenuMessage);
-        maMap.put("sender", "Melvin");
+        maMap.put("sender", "Wens");
 
         maBase.collection("CHAT").add(maMap)
                 .addOnSuccessListener(documentReference -> {

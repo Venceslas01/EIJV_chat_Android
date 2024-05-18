@@ -8,17 +8,19 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import fr.upjv.eijv_chat_androd.MessageAdapter;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 public class activityScroll extends AppCompatActivity {
     private List<messageFictif> lesMessages;
     private RecyclerView monRecycleView;
     private EditText editTextMessage;
     private ActivitySendMessage sendMessage;
+    private ReceptionMessage receptionMessage;
+    private MessageAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +30,29 @@ public class activityScroll extends AppCompatActivity {
         editTextMessage = findViewById(R.id.id_messageToSend);
 
         lesMessages = new ArrayList<>();
-        initMessages();
+        receptionMessage = new ReceptionMessage();
 
-        MessageAdapter adapter = new MessageAdapter(lesMessages);
+        adapter = new MessageAdapter(lesMessages);
         monRecycleView.setLayoutManager(new LinearLayoutManager(this));
         monRecycleView.setAdapter(adapter);
+
+        // Récupérer les messages de manière asynchrone
+        receptionMessage.getMessages(messages -> {
+            runOnUiThread(() -> {
+                lesMessages.clear();
+                lesMessages.addAll(messages);
+                adapter.notifyDataSetChanged();
+            });
+        });
+
+        // Écouter les nouveaux messages
+        receptionMessage.startListeningForMessages(messages -> {
+            runOnUiThread(() -> {
+                lesMessages.clear();
+                lesMessages.addAll(messages);
+                adapter.notifyDataSetChanged();
+            });
+        });
 
         sendMessage = new ActivitySendMessage(this, editTextMessage);
 
@@ -43,58 +63,5 @@ public class activityScroll extends AppCompatActivity {
                 sendMessage.onClickMessageToSend(v);
             }
         });
-    }
-
-    private void initMessages() {
-        lesMessages.add(new messageFictif("Bonjour", "Moi", LocalDateTime.now()));
-        lesMessages.add(new messageFictif("Salut", "Toi", LocalDateTime.now().minusHours(1)));
-        lesMessages.add(new messageFictif("Comment ça va ?", "Moi", LocalDateTime.now().minusHours(2)));
-        lesMessages.add(new messageFictif("Bien et toi ?", "Toi", LocalDateTime.now().minusHours(3)));
-        lesMessages.add(new messageFictif("Ça va", "Moi", LocalDateTime.now().minusHours(4)));
-        lesMessages.add(new messageFictif("Bonjour", "Moi", LocalDateTime.now()));
-        lesMessages.add(new messageFictif("Salut", "Toi", LocalDateTime.now().minusHours(1)));
-        lesMessages.add(new messageFictif("Comment ça va ?", "Moi", LocalDateTime.now().minusHours(2)));
-        lesMessages.add(new messageFictif("Bien et toi ?", "Toi", LocalDateTime.now().minusHours(3)));
-        lesMessages.add(new messageFictif("Ça va", "Moi", LocalDateTime.now().minusHours(4)));
-        lesMessages.add(new messageFictif("Bonjour", "Moi", LocalDateTime.now()));
-        lesMessages.add(new messageFictif("Salut", "Toi", LocalDateTime.now().minusHours(1)));
-        lesMessages.add(new messageFictif("Comment ça va ?", "Moi", LocalDateTime.now().minusHours(2)));
-        lesMessages.add(new messageFictif("Bien et toi ?", "Toi", LocalDateTime.now().minusHours(3)));
-        lesMessages.add(new messageFictif("Ça va", "Moi", LocalDateTime.now().minusHours(4)));
-        lesMessages.add(new messageFictif("Bonjour", "Moi", LocalDateTime.now()));
-        lesMessages.add(new messageFictif("Salut", "Toi", LocalDateTime.now().minusHours(1)));
-        lesMessages.add(new messageFictif("Comment ça va ?", "Moi", LocalDateTime.now().minusHours(2)));
-        lesMessages.add(new messageFictif("Bien et toi ?", "Toi", LocalDateTime.now().minusHours(3)));
-        lesMessages.add(new messageFictif("Ça va", "Moi", LocalDateTime.now().minusHours(4)));
-        lesMessages.add(new messageFictif("Bonjour", "Moi", LocalDateTime.now()));
-        lesMessages.add(new messageFictif("Salut", "Toi", LocalDateTime.now().minusHours(1)));
-        lesMessages.add(new messageFictif("Comment ça va ?", "Moi", LocalDateTime.now().minusHours(2)));
-        lesMessages.add(new messageFictif("Bien et toi ?", "Toi", LocalDateTime.now().minusHours(3)));
-        lesMessages.add(new messageFictif("Ça va", "Moi", LocalDateTime.now().minusHours(4)));
-        lesMessages.add(new messageFictif("Bonjour", "Moi", LocalDateTime.now()));
-        lesMessages.add(new messageFictif("Salut", "Toi", LocalDateTime.now().minusHours(1)));
-        lesMessages.add(new messageFictif("Comment ça va ?", "Moi", LocalDateTime.now().minusHours(2)));
-        lesMessages.add(new messageFictif("Bien et toi ?", "Toi", LocalDateTime.now().minusHours(3)));
-        lesMessages.add(new messageFictif("Ça va", "Moi", LocalDateTime.now().minusHours(4)));
-        lesMessages.add(new messageFictif("Bonjour", "Moi", LocalDateTime.now()));
-        lesMessages.add(new messageFictif("Salut", "Toi", LocalDateTime.now().minusHours(1)));
-        lesMessages.add(new messageFictif("Comment ça va ?", "Moi", LocalDateTime.now().minusHours(2)));
-        lesMessages.add(new messageFictif("Bien et toi ?", "Toi", LocalDateTime.now().minusHours(3)));
-        lesMessages.add(new messageFictif("Ça va", "Moi", LocalDateTime.now().minusHours(4)));
-        lesMessages.add(new messageFictif("Bonjour", "Moi", LocalDateTime.now()));
-        lesMessages.add(new messageFictif("Salut", "Toi", LocalDateTime.now().minusHours(1)));
-        lesMessages.add(new messageFictif("Comment ça va ?", "Moi", LocalDateTime.now().minusHours(2)));
-        lesMessages.add(new messageFictif("Bien et toi ?", "Toi", LocalDateTime.now().minusHours(3)));
-        lesMessages.add(new messageFictif("Ça va", "Moi", LocalDateTime.now().minusHours(4)));
-        lesMessages.add(new messageFictif("Bonjour", "Moi", LocalDateTime.now()));
-        lesMessages.add(new messageFictif("Salut", "Toi", LocalDateTime.now().minusHours(1)));
-        lesMessages.add(new messageFictif("Comment ça va ?", "Moi", LocalDateTime.now().minusHours(2)));
-        lesMessages.add(new messageFictif("Bien et toi ?", "Toi", LocalDateTime.now().minusHours(3)));
-        lesMessages.add(new messageFictif("Ça va", "Moi", LocalDateTime.now().minusHours(4)));
-        lesMessages.add(new messageFictif("Bonjour", "Moi", LocalDateTime.now()));
-        lesMessages.add(new messageFictif("Salut", "Toi", LocalDateTime.now().minusHours(1)));
-        lesMessages.add(new messageFictif("Comment ça va ?", "Moi", LocalDateTime.now().minusHours(2)));
-        lesMessages.add(new messageFictif("Bien et toi ?", "Toi", LocalDateTime.now().minusHours(3)));
-        lesMessages.add(new messageFictif("Ça va", "Moi", LocalDateTime.now().minusHours(4)));
     }
 }
