@@ -11,13 +11,16 @@ import java.util.List;
 public class MessageAdapter extends RecyclerView.Adapter<MessageViewHolder> {
     private final List<messageFictif> lesMessages;
     private final String mySenderIdentifier = "Moi"; // Identifier de l'utilisateur actuel
-    private static final int VIEW_TYPE_ME = 1;
-    private static final int VIEW_TYPE_OTHER = 2;
+    private static final int VIEW_TYPE_ME = 1; // Type de vue pour les messages de l'utilisateur actuel
+    private static final int VIEW_TYPE_OTHER = 2; // Type de vue pour les messages des autres utilisateurs
 
+    // Constructeur de la classe MessageAdapter
     public MessageAdapter(List<messageFictif> lesMessages) {
         this.lesMessages = lesMessages;
     }
 
+
+    // Méthode pour obtenir le type de vue en fonction de l'expéditeur du message
     @Override
     public int getItemViewType(int position) {
         messageFictif message = lesMessages.get(position);
@@ -28,6 +31,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageViewHolder> {
         }
     }
 
+// Méthode pour créer un MessageViewHolder en fonction du type de vue
     @NonNull
     @Override
     public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -41,12 +45,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageViewHolder> {
         return new MessageViewHolder(view);
     }
 
+    // Méthode pour lier un MessageViewHolder à un message
     @Override
     public void onBindViewHolder(@NonNull MessageViewHolder holder, int position) {
         messageFictif message = lesMessages.get(position);
         holder.bind(message);
     }
 
+    // Méthode pour obtenir le nombre de messages
     @Override
     public int getItemCount() {
         return lesMessages.size();
@@ -55,27 +61,3 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageViewHolder> {
 
 
 
-/*public class MessageAdapter extends RecyclerView.Adapter<MessageViewHolder> {
-    private final List<messageFictif> lesMessages;
-
-    public MessageAdapter(List<messageFictif> lesMessages) {
-        this.lesMessages = lesMessages;
-    }
-
-    @NonNull
-    public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.messageligne, parent, false);
-        return new MessageViewHolder(view);
-    }
-
-
-    public void onBindViewHolder(@NonNull MessageViewHolder holder, int position) {
-        messageFictif message = lesMessages.get(position);
-        holder.bind(message);
-    }
-
-    public int getItemCount() {
-        return lesMessages.size();
-    }
-}*/
