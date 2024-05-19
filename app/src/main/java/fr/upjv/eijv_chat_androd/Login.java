@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Login extends AppCompatActivity {
     private FirebaseAuth auth;
-    private EditText loginEmail, loginPassword;
+    private EditText loginEmail, loginMDP;
 
     @SuppressLint("MissingInflatedId")
     @Override protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +29,13 @@ public class Login extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         //On récupere les variable du formulaire de connexion
         loginEmail = findViewById(R.id.login_email);
-        loginPassword = findViewById(R.id.login_password);
-        Button loginButton = findViewById(R.id.login_button);
-        TextView signupRedirectText = findViewById(R.id.signUpRedirectText);
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        loginMDP= findViewById(R.id.login_password);
+        Button boutonLogin = findViewById(R.id.login_button);
+        TextView inscriptionRedirection = findViewById(R.id.signUpRedirectText);
+        boutonLogin.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View view) {
                 String email = loginEmail.getText().toString();
-                String pass = loginPassword.getText().toString();
+                String pass = loginMDP.getText().toString();
                 if(!email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     if (!pass.isEmpty()) {
                         auth.signInWithEmailAndPassword(email, pass) .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
@@ -53,17 +53,17 @@ public class Login extends AppCompatActivity {
                             }
                         });
                     } else {
-                        loginPassword.setError("Password cannot be empty");
+                        loginMDP.setError("Le mot de passe ne peut pas être vide");
                     }
                 } else if (email.isEmpty()) {
-                    loginEmail.setError("Email cannot be empty");
+                    loginEmail.setError("L'email ne peut pas être vide");
                 } else {
-                    loginEmail.setError("Please enter a valid email");
+                    loginEmail.setError("Entrez une email correct");
                 }
             }
         });
         //Redirection type url
-        signupRedirectText.setOnClickListener(new View.OnClickListener() {
+        inscriptionRedirection.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View view) {
                 startActivity(new Intent(Login.this, Inscription.class));
             }
