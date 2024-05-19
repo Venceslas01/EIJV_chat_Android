@@ -14,7 +14,6 @@ import fr.upjv.eijv_chat_androd.activityScroll;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button bouttonLancerScrol;
     private Button bouttonInscription;
 
     private Button bouttonLogin;
@@ -22,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.accueil_app);
-        bouttonLancerScrol = findViewById(R.id.idButtonScrol);
         bouttonInscription = findViewById(R.id.id_button_Inscription);
         bouttonLogin = findViewById(R.id.id_button_connexion);
 
@@ -37,11 +35,6 @@ public class MainActivity extends AppCompatActivity {
 
         bouttonLogin.setOnClickListener(view -> {
             Intent monIntent = new Intent(this, Login.class);
-            startActivity(monIntent);
-        });
-
-        bouttonLancerScrol.setOnClickListener(view -> {
-            Intent monIntent = new Intent(this, activityScroll.class);
             startActivity(monIntent);
         });
 
