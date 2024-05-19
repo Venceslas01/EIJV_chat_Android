@@ -15,15 +15,30 @@ import fr.upjv.eijv_chat_androd.activityScroll;
 public class MainActivity extends AppCompatActivity {
 
     private Button bouttonLancerScrol;
+    private Button bouttonInscription;
+
+    private Button bouttonLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.accueil_app);
         bouttonLancerScrol = findViewById(R.id.idButtonScrol);
+        bouttonInscription = findViewById(R.id.id_button_Inscription);
+        bouttonLogin = findViewById(R.id.id_button_connexion);
 
          FirebaseAuth mAuth;
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        bouttonInscription.setOnClickListener(view -> {
+            Intent monIntent = new Intent(this, Inscription.class);
+            startActivity(monIntent);
+        });
+
+        bouttonLogin.setOnClickListener(view -> {
+            Intent monIntent = new Intent(this, Login.class);
+            startActivity(monIntent);
+        });
 
         bouttonLancerScrol.setOnClickListener(view -> {
             Intent monIntent = new Intent(this, activityScroll.class);
