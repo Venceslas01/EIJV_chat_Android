@@ -14,7 +14,7 @@ public class MessageViewHolder extends RecyclerView.ViewHolder {
     private final TextView contentTextView;
     private final TextView senderTextView;
     private final TextView timestampTextView;
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+    private final DateTimeFormatter formateur = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
     // Constructeur de la classe MessageViewHolder
     public MessageViewHolder(@NonNull View itemView) {
@@ -28,6 +28,6 @@ public class MessageViewHolder extends RecyclerView.ViewHolder {
     public void bind(messageFictif message) {
         this.contentTextView.setText(message.getContent());
         this.senderTextView.setText(message.getSender());
-        this.timestampTextView.setText(message.getTimestamp().format(formatter));
+        this.timestampTextView.setText(message.getTimestamp().format(formateur));
     }
 }

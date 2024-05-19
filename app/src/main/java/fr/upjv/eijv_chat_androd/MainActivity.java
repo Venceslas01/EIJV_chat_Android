@@ -14,26 +14,26 @@ import fr.upjv.eijv_chat_androd.activityScroll;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button bouttonInscription;
+    private Button boutonInscription;
 
-    private Button bouttonLogin;
+    private Button boutonLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.accueil_app);
-        bouttonInscription = findViewById(R.id.id_button_Inscription);
-        bouttonLogin = findViewById(R.id.id_button_connexion);
+        boutonInscription = findViewById(R.id.id_button_Inscription);
+        boutonLogin = findViewById(R.id.id_button_connexion);
 
-         FirebaseAuth mAuth;
+        FirebaseAuth mAuth;
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        bouttonInscription.setOnClickListener(view -> {
+        boutonInscription.setOnClickListener(view -> {
             Intent monIntent = new Intent(this, Inscription.class);
             startActivity(monIntent);
         });
 
-        bouttonLogin.setOnClickListener(view -> {
+        boutonLogin.setOnClickListener(view -> {
             Intent monIntent = new Intent(this, Login.class);
             startActivity(monIntent);
         });

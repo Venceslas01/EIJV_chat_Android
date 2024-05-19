@@ -16,7 +16,8 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class ReceptionMessage {
-    private FirebaseFirestore db;  //connexion à la base de données Firestore
+    //connexion à la base de données Firestore
+    private FirebaseFirestore db;
 
     // Constructeur de la classe ReceptionMessage
     public ReceptionMessage() {
@@ -24,7 +25,7 @@ public class ReceptionMessage {
     }
 
     // Méthode pour récupérer les messages
-    public void getMessages(Consumer<List<messageFictif>> onMessagesReceived) {
+    public void getMessages(Consumer<List<messageFictif>> recevoirMessage) {
         // Récupérer les messages de la base de données Firestore dans la collection "CHAT"
         db.collection("CHAT")
                 .get()
@@ -52,9 +53,9 @@ public class ReceptionMessage {
                             // Trier les messages par timestamp
                             Collections.sort(messages, Comparator.comparing(messageFictif::getTimestamp));
 
-                            onMessagesReceived.accept(messages);
+                            recevoirMessage.accept(messages);
                         } else {
-                            onMessagesReceived.accept(Collections.emptyList());
+                            recevoirMessage.accept(Collections.emptyList());
                         }
                     } else {
                         // Afficher l'erreur si la requête a échoué
@@ -64,15 +65,15 @@ public class ReceptionMessage {
     }
 
     // Méthode pour écouter les nouveaux messages
-    public void startListeningForMessages(Consumer<List<messageFictif>> onMessagesUpdated) {
+    public void startListeningForMessages(Consumer<List<messageFictif>> messageMiseAJour) {
         // Ajouter un écouteur pour écouter les changements dans la collection "CHAT"
         db.collection("CHAT").addSnapshotListener(new EventListener<QuerySnapshot>() {
             // Méthode appelée lorsqu'un événement est reçu
             @Override
-            public void onEvent(QuerySnapshot snapshots, FirebaseFirestoreException e) {
+            public void onEvent(QuerySnapshot snapshots, FirebaseFirestoreException erreur) {
                 // Vérifier s'il y a une erreur
-                if (e != null) {
-                    e.printStackTrace();
+                if (erreur != null) {
+                    erreur.printStackTrace();
                     return;
                 }
 
@@ -94,7 +95,7 @@ public class ReceptionMessage {
                     // Trier les messages par timestamp
                     Collections.sort(messages, Comparator.comparing(messageFictif::getTimestamp));
 
-                    onMessagesUpdated.accept(messages);
+                    messageMiseAJour.accept(messages);
                 }
             }
         });
