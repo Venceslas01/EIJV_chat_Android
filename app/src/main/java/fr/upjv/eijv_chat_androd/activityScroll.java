@@ -35,8 +35,8 @@ public class activityScroll extends AppCompatActivity {
     private ReceptionMessage receptionMessage;
     private MessageAdapter adapter;
 
+    //client qui accede au service de localisation de google
     private FusedLocationProviderClient fusedLocationClient;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,8 +92,12 @@ public class activityScroll extends AppCompatActivity {
     }
 
     private void getLastLocation(String email) {
+        //Manifest.permission.ACCESS_FINE_LOCATION une constante qui represente la permission pour acceder à la localisation precise, checkselfPermission va rechercher la valeur de cette constante
+        //on verifie si c'est bien egal à permission granted est une constante indiquant que l'autorisation à été attribuée
+        //coarse pour la localisation approximative de l'appareil
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            //si une des deux conditions est respecté, donc une des deux variables est differente on retourne sans rien faire d'autre
             return;
         }
         fusedLocationClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
@@ -113,7 +117,7 @@ public class activityScroll extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+   public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == autorisationLocation) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
