@@ -1,5 +1,6 @@
 package fr.upjv.eijv_chat_androd;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +35,9 @@ public class activityScroll extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chatbox);
+        // Récupérer l'email passé depuis l'activité précédente
+        Intent intent = getIntent();
+        String email = intent.getStringExtra("email");
         monRecycleView = findViewById(R.id.idRecyclerView);
         editTextMessage = findViewById(R.id.id_messageToSend);
 
@@ -42,7 +46,7 @@ public class activityScroll extends AppCompatActivity {
         receptionMessage = new ReceptionMessage();
 
         // Initialisation de l'adaptateur pour afficher les messages
-        adapter = new MessageAdapter(lesMessages);
+        adapter = new MessageAdapter(lesMessages,email);
         monRecycleView.setLayoutManager(new LinearLayoutManager(this));
         monRecycleView.setAdapter(adapter);
 
@@ -65,7 +69,7 @@ public class activityScroll extends AppCompatActivity {
         });
 
         //initialisation de l'objet pour envoyer un message
-        sendMessage = new ActivitySendMessage(this, editTextMessage);
+        sendMessage = new ActivitySendMessage(this, editTextMessage, email);
 
         // Écouter le clic sur le bouton pour envoyer un message
         Button buttonSendMessage = findViewById(R.id.id_envoyer_messsage);

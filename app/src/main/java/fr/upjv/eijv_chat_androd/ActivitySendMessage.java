@@ -7,19 +7,19 @@ import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 public class ActivitySendMessage {
 
     private FirebaseFirestore maBase;
     private EditText editTextMessage;
+    private String senderEmail;
 
-    public ActivitySendMessage(Context context, EditText editTextMessage) {
+    public ActivitySendMessage(Context context, EditText editTextMessage, String email) {
         maBase = FirebaseFirestore.getInstance();
         this.editTextMessage = editTextMessage;
+        this.senderEmail=email;
     }
 
     public void onClickMessageToSend(View view) {
@@ -36,7 +36,7 @@ public class ActivitySendMessage {
 
         maMap.put("timestamp", timestamp);
         maMap.put("contenu", contenuMessage);
-        maMap.put("sender", "Moi");
+        maMap.put("sender", senderEmail);
 
         maBase.collection("CHAT").add(maMap)
                 .addOnSuccessListener(documentReference -> {

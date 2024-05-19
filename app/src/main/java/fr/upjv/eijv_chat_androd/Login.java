@@ -42,7 +42,10 @@ public class Login extends AppCompatActivity {
                             @Override public void onSuccess(AuthResult authResult) {
                                 //Si le login est validé on redirige vers la messagerie
                                 Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(Login.this, activityScroll.class )); finish();
+                                Intent intent = new Intent(Login.this, activityScroll.class);
+                                intent.putExtra("email", email);
+                                startActivity(intent);
+                                finish();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override public void onFailure(@NonNull Exception e) {

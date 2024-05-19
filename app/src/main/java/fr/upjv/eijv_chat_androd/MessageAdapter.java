@@ -10,13 +10,14 @@ import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageViewHolder> {
     private final List<messageFictif> lesMessages;
-    private final String mySenderIdentifier = "Moi"; // Identifier de l'utilisateur actuel
+    private final String mySenderIdentifier; // Identifier de l'utilisateur actuel
     private static final int VIEW_TYPE_ME = 1; // Type de vue pour les messages de l'utilisateur actuel
     private static final int VIEW_TYPE_OTHER = 2; // Type de vue pour les messages des autres utilisateurs
 
     // Constructeur de la classe MessageAdapter
-    public MessageAdapter(List<messageFictif> lesMessages) {
+    public MessageAdapter(List<messageFictif> lesMessages, String email) {
         this.lesMessages = lesMessages;
+        this.mySenderIdentifier = email;
     }
 
 
