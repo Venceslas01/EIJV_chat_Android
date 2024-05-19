@@ -32,7 +32,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageViewHolder> {
         }
     }
 
-// Méthode pour créer un MessageViewHolder en fonction du type de vue
+    // Méthode pour créer un MessageViewHolder en fonction du type de vue
     @NonNull
     @Override
     public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
