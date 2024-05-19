@@ -37,6 +37,7 @@ public class Inscription extends AppCompatActivity {
         loginRedirectText = findViewById(R.id.loginRedirectText);
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View view) {
+                //On verifie que les champs sont bien rempli
                 String user = signupEmail.getText().toString().trim();
                 String pass = signupPassword.getText().toString().trim();
                 if (user.isEmpty()){
@@ -46,8 +47,10 @@ public class Inscription extends AppCompatActivity {
                     signupPassword.setError("Password cannot be empty");
                 }
                 else{
+                    //On ajoute le mail et le mp sur la base d'authentification
                     auth.createUserWithEmailAndPassword(user, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override public void onComplete(@NonNull Task<AuthResult> task) {
+                            //Si cote bdd c'est valide, on redirige vers la page de login
                             if(task.isSuccessful()){ Toast.makeText(Inscription.this, "Signup Successful", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(Inscription.this, Login.class));
                             }

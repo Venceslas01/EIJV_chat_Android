@@ -25,7 +25,9 @@ public class Login extends AppCompatActivity {
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        //On se connecte à la base de données
         auth = FirebaseAuth.getInstance();
+        //On récupere les variable du formulaire de connexion
         loginEmail = findViewById(R.id.login_email);
         loginPassword = findViewById(R.id.login_password);
         Button loginButton = findViewById(R.id.login_button);
@@ -38,6 +40,7 @@ public class Login extends AppCompatActivity {
                     if (!pass.isEmpty()) {
                         auth.signInWithEmailAndPassword(email, pass) .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                             @Override public void onSuccess(AuthResult authResult) {
+                                //Si le login est validé on redirige vers la messagerie
                                 Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(Login.this, activityScroll.class )); finish();
                             }
@@ -56,6 +59,7 @@ public class Login extends AppCompatActivity {
                 }
             }
         });
+        //Redirection type url
         signupRedirectText.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View view) {
                 startActivity(new Intent(Login.this, Inscription.class));
