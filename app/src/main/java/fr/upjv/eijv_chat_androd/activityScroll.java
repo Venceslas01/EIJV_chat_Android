@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class activityScroll extends AppCompatActivity {
-    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    private static final int autorisationLocation= 1;
 
     private List<messageFictif> lesMessages;
     private RecyclerView monRecycleView;
@@ -55,6 +55,7 @@ public class activityScroll extends AppCompatActivity {
         monRecycleView.setLayoutManager(new LinearLayoutManager(this));
         monRecycleView.setAdapter(adapter);
 
+        //On recupere les messages  une premiere fois
         receptionMessage.getMessages(messages -> {
             runOnUiThread(() -> {
                 lesMessages.clear();
@@ -62,7 +63,7 @@ public class activityScroll extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             });
         });
-
+        //On ecoute pour les futur messages
         receptionMessage.startListeningForMessages(messages -> {
             runOnUiThread(() -> {
                 lesMessages.clear();
@@ -83,7 +84,7 @@ public class activityScroll extends AppCompatActivity {
         buttonGPS.setOnClickListener(v -> {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                     ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, autorisationLocation);
             } else {
                 getLastLocation(email);
             }
@@ -114,7 +115,7 @@ public class activityScroll extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
+        if (requestCode == autorisationLocation) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 getLastLocation(getIntent().getStringExtra("email"));
             } else {
