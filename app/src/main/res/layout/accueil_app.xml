@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/accueil_background">
 
     <TextView
         android:id="@+id/id_app"
@@ -12,7 +13,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="167dp"
-        android:text="4 Chat-EIJV"
+        android:text=" CHAT EIJV"
         android:textSize="32sp"
         app:layout_constraintBottom_toTopOf="@+id/id_button_Inscription"
         app:layout_constraintEnd_toEndOf="parent"

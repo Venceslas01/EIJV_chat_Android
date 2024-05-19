@@ -105,7 +105,7 @@ public class activityScroll extends AppCompatActivity {
             public void onComplete(@NonNull Task<Location> task) {
                 if (task.isSuccessful() && task.getResult() != null) {
                     Location location = task.getResult();
-                    String gpsMessage = "Coordonnées GPS de ma position"+"Lat: " + location.getLatitude() + ", Lon: " + location.getLongitude();
+                    String gpsMessage = "Coordonnées GPS de ma position ("+" Lat: " + location.getLatitude() + ", Lon: " + location.getLongitude() + ")";
                     // Utiliser editTextMessage pour envoyer le message GPS
                     editTextMessage.setText(gpsMessage);
                     sendMessage.onClickMessageToSend(editTextMessage); // Envoyer le message GPS
