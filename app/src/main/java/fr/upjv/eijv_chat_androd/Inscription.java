@@ -23,28 +23,30 @@ import android.os.Bundle;
 public class Inscription extends AppCompatActivity {
     // Declare any other necessary variables. p
     private FirebaseAuth auth;
-    private EditText signupEmail, signupPassword;
-    private Button signupButton;
-    private TextView loginRedirectText;
+    private EditText inscriptionEmail, inscriptionMDP;
+    private Button inscriptionBouton;
+    private TextView redirectionLogin;
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inscription);
         //Initialize the FirebaseAuth instance in the onCreate()
         auth = FirebaseAuth.getInstance();
-        signupEmail = findViewById(R.id.signup_email);
-        signupPassword = findViewById(R.id.signup_password);
-        signupButton = findViewById(R.id.signup_button);
-        loginRedirectText = findViewById(R.id.loginRedirectText);
-        signupButton.setOnClickListener(new View.OnClickListener() {
+        //On recupere les variables de nos bouton et editText
+        inscriptionEmail = findViewById(R.id.signup_email);
+        inscriptionMDP = findViewById(R.id.signup_password);
+        inscriptionBouton = findViewById(R.id.signup_button);
+        redirectionLogin = findViewById(R.id.loginRedirectText);
+        inscriptionBouton.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View view) {
                 //On verifie que les champs sont bien rempli
-                String user = signupEmail.getText().toString().trim();
-                String pass = signupPassword.getText().toString().trim();
+                //On recupere des chaines de caractere et on supprime les caractere invisible potentiellement genant avec trim
+                String user = inscriptionEmail.getText().toString().trim();
+                String pass = inscriptionMDP.getText().toString().trim();
                 if (user.isEmpty()){
-                    signupEmail.setError("Email cannot be empty");
+                   inscriptionEmail.setError("Email cannot be empty");
                 }
                 if(pass.isEmpty()){
-                    signupPassword.setError("Password cannot be empty");
+                    inscriptionMDP.setError("Password cannot be empty");
                 }
                 else{
                     //On ajoute le mail et le mp sur la base d'authentification
@@ -62,7 +64,7 @@ public class Inscription extends AppCompatActivity {
                 }
             }
         });
-        loginRedirectText.setOnClickListener(new View.OnClickListener() {
+        redirectionLogin.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View view) { startActivity(new Intent(Inscription.this, Login.class)); } });
     }
 }
